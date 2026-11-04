@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weightsurg"
+version = "0.1.0"
+description = "Zero-Gradient Weight-Space Programming & Neural Circuit Surgery Toolkit"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "WeightSurg Contributors" }
+]
+keywords = [
+    "mechanistic-interpretability",
+    "weight-editing",
+    "model-surgery",
+    "rome",
+    "memit",
+    "zero-gradient",
+    "safetensors",
+    "transformers",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.1.0",
+    "safetensors>=0.4.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "transformers>=4.38.0",
+    "accelerate>=0.27.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+mlx = [
+    "mlx>=0.10.0; platform_system == 'Darwin' and platform_machine == 'arm64'",
+    "mlx-lm>=0.10.0; platform_system == 'Darwin' and platform_machine == 'arm64'",
+]
+llm = [
+    "openai>=1.12.0",
+    "anthropic>=0.18.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.3.0",
+    "mypy>=1.8.0",
+]
+
+[project.scripts]
+weightsurg = "weightsurg.cli:main"
+weightsurg-cli = "weightsurg.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["weightsurg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+
